@@ -22,29 +22,29 @@ class Vendor
       end
     end 
 
-    def id(id)
-        all.find do |vendor|
-          vendor.id.to_i == id
-        end
-      end
-    end
+  #   def id(id)
+  #       all.find do |vendor|
+  #         vendor.id.to_i == id
+  #       end
+  #     end
+  #   end
 
-    def name(name)
-      all.select do |vendor|
-        vendor.name == name
-      end
-    end
+  #   def name(name)
+  #     all.select do |vendor|
+  #       vendor.name == name
+  #     end
+  #   end
 
-    def No_of_employees(empl)
-      all.select do |vendor|
-        vendor.no_of_employees.to_i == no_of_employees
-      end
-    end
+  #   def No_of_employees(empl)
+  #     all.select do |vendor|
+  #       vendor.no_of_employees.to_i == no_of_employees
+  #     end
+  #   end
 
 
-    def market_id(m_id)
-    end
-  end  
+  #   def market_id(m_id)
+  #   end
+  # end  
 
 
 

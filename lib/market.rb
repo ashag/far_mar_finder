@@ -1,3 +1,5 @@
+require_relative 'vendor'
+
 class Market
 
   attr_accessor :market_id, :name, :address, :city, :county, :state, :zip
@@ -33,6 +35,10 @@ class Market
     all.find_all do |state_name| 
       state_name.state == state
     end
+  end
+
+  def find_vendors
+    Vendor.all.market_id == market_id
   end
 end
  
