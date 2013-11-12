@@ -3,7 +3,7 @@ class Vendor
 attr_accessor :id, :name, :No_of_employees, :market_id
 
   
-  def self.all_vendors
+  def self.all
     CSV.read("./support/vendors.csv").map do |array|
       Vendors.new(array)
     end

@@ -7,7 +7,7 @@ class Market
     @name = n
   end
 
-  def self.all_markets
+  def self.all
     CSV.read("./support/markets.csv").map do |array|
       Market.new(array)
     end
