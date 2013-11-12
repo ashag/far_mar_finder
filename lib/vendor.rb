@@ -41,7 +41,6 @@ class Vendor
       end
     end
 
-
     def market_id(m_id)
     end
   end  
