@@ -1,5 +1,5 @@
 ## Authors
-- Asha Golveo
+- Asha Golveo :)
 - Shadae Holmes
 
 # FarMar Finder
