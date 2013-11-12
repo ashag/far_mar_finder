@@ -9,3 +9,14 @@ require_relative 'vendor'
 class FarMarFinder
   # Your code goes here
 end
+
+finder = FarMarFinder.new
+finder.markets.all
+
+finder.market
+finder.vendors
+finder.products
+finder.sales
+
+
+

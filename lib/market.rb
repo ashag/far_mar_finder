@@ -3,16 +3,26 @@ class Market
 
   attr_accessor :name, :address #etc
 
-  def initialize(array)
+  def initialize()
     @name
-    end
+  end
 
   def self.all_markets
     CSV.read("./support/markets.csv").map do |array|
       Market.new(array)
     end
   end
-end #end of market
+
+  def self.find(id)
+    CSV.read("./support/markets.csv").find do |array|
+      array[0].to_i == id
+    end
+  end
+end 
+
+
+
+#end of market
 
 #   def ID
 #   end
