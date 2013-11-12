@@ -8,7 +8,6 @@ require_relative 'vendor'
 
 class FarMarFinder
   # Your code goes here
-<<<<<<< HEAD
 
   def markets
     Market.all.inspect
@@ -26,17 +25,8 @@ class FarMarFinder
     Sale.all.inspect
   end
 end
-=======
-end
-
-finder = FarMarFinder.new
-finder.markets.all
-
-finder.market
-finder.vendors
-finder.products
-finder.sales
 
 
 
->>>>>>> 967417ad7fcfb2bd9286ebe3f09101ed076fbf2f
+
+
