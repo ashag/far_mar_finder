@@ -3,8 +3,8 @@ class Market
 
   attr_accessor :name, :address #etc
 
-  def initialize()
-    @name
+  def initialize(n)
+    @name = n
   end
 
   def self.all_markets

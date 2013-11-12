@@ -2,6 +2,12 @@ class Vendor
 
 attr_accessor :id, :name, :No_of_employees, :market_id
 
+  
+  def self.all_vendors
+    CSV.read("./support/vendors.csv").map do |array|
+      Vendors.new(array)
+    end
+  end
   def self.id(id)
       CSV.read("./support/vendors.csv").find do |array|
         array[0].to_i == id
