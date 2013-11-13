@@ -30,4 +30,17 @@ class Product
       vendor.vendor_id == id.to_i
     end
   end
+
+  def market
+    vendor.market
+  end
+
+  def vendor
+    Vendor.find(vendor_id)
+  end
+
+  def sales
+    Sales.select(vendor_id)
+  end
+
 end
