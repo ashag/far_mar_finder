@@ -31,6 +31,12 @@ class Sale
       products.product_id.to_i == product.to_i
     end
   end
+
+  def self.vendor_id(ven_num)
+    all.select do |vendor|
+      vendor.vendor_id.to_i == ven_num.to_i
+    end
+  end
 end
 
   # def amount_in_cents

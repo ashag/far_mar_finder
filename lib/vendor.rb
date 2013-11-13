@@ -3,10 +3,10 @@ class Vendor
   attr_accessor :id, :name, :no_of_employees, :market_id
    
     def initialize(array)
-      @id = array[0]
+      @id = array[0].to_i
       @name = array[1]
-      @no_of_employees = array[2]
-      @market_id = array[3]
+      @no_of_employees = array[2].to_i
+      @market_id = array[3].to_i
     end
 
     def self.all
@@ -15,33 +15,38 @@ class Vendor
       end
     end
 
-    def self.find(search)
+    def self.find(id)
       all.find do |vendor|
-        vendor.inspect do |x|
-        x = search.to_s
+        vendor.id == id.to_i
       end
     end 
 
-    def id(id)
-        all.find do |vendor|
-          vendor.id.to_i == id
-        end
+    def self.find_by_name(ven_name)
+      all.find do |vendor|
+        vendor.name == ven_name
       end
     end
 
-    def name(name)
+    def self.find_by_no_of_employees(empl)
       all.select do |vendor|
-        vendor.name == name
+        vendor.no_of_employees == empl
       end
     end
 
-    def No_of_employees(empl)
-      all.select do |vendor|
-        vendor.no_of_employees.to_i == no_of_employees
-      end
+    def self.by_market(market_id)
+      Market.find(market_id)
     end
 
-    def market_id(m_id)
+    def market
+      Market.find(market_id)
+    end
+
+    def sales
+      Sales.select(vendor_id)
+    end
+
+    def products
+      Product.select(vendor_id)
     end
   end  
 

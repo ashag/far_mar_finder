@@ -1,10 +1,10 @@
 class Product
-  attr_accessor :product_id, :name, :vendor_id
+  attr_accessor :id, :name, :vendor_id
 
   def initialize(array)
-    @product_id = array[0]
+    @id = array[0].to_i
     @name = array[1]
-    @vendor_id = array[2] 
+    @vendor_id = array[2].to_i
   end
 
   def self.all
@@ -13,9 +13,9 @@ class Product
     end
   end
 
-  def self.find(search)
+  def self.find(id)
     all.find do |product|
-      product.product_id.to_i == search.to_i
+      product.id == id.to_i
     end
   end
 
@@ -25,9 +25,9 @@ class Product
     end
   end
 
-  def self.find_all_by_vendorID(id)
+  def self.by_vendor(id)
     all.find_all do |vendor|
-      vendor.vendor_id.to_i == id.to_i
+      vendor.vendor_id == id.to_i
     end
   end
 end
