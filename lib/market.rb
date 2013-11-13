@@ -36,8 +36,8 @@ class Market
     end
   end
 
-  def find_vendors
-    Vendor.all.market_id == market_id
+  def self.vendors(market_id)
+    Vendor.find_all_by_market_id(market_id)
   end
 end
  
