@@ -1,9 +1,9 @@
 class Market
 
-  attr_accessor :market_id, :name, :address, :city, :county, :state, :zip
+  attr_accessor :id, :name, :address, :city, :county, :state, :zip
 
   def initialize(array)
-    @market_id = array [0]
+    @id = array [0].to_i
     @name = array [1]
     @address = array[2]
     @city = array[3]
@@ -20,7 +20,7 @@ class Market
 
   def self.find(search)
     all.find do |market|
-      market.market_id.to_i == search.to_i
+      market.id.to_i == search.to_i
     end
   end
 
