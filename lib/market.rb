@@ -1,5 +1,3 @@
-require_relative 'vendor'
-
 class Market
 
   attr_accessor :market_id, :name, :address, :city, :county, :state, :zip
@@ -12,6 +10,7 @@ class Market
     @county = array[-3]
     @state = array[-2]
     @zip = array[-1]
+  end
 
   def self.all
     CSV.read("./support/markets.csv").map do |array|

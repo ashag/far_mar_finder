@@ -22,7 +22,6 @@ class Vendor
       end
     end 
 
-<<<<<<< HEAD
     def id(id)
         all.find do |vendor|
           vendor.id.to_i == id
@@ -45,7 +44,7 @@ class Vendor
     def market_id(m_id)
     end
   end  
-=======
+
   #   def id(id)
   #       all.find do |vendor|
   #         vendor.id.to_i == id
@@ -69,7 +68,7 @@ class Vendor
   #   def market_id(m_id)
   #   end
   # end  
->>>>>>> 33c6e36ef53e6a9b95235036ef0ea027c6d7147e
+
 
 
 
