@@ -31,22 +31,28 @@ class Vendor
       all.select do |vendor|
         vendor.no_of_employees == empl
       end
-    end
+    end 
 
     def self.by_market(market_id)
-      Market.find(market_id)
+      all.select do |vendor|
+        vendor.market_id == market_id
+      end
     end
+
+    # def self.by_market(market_id)
+    #   Market.find(market_id)
+    # end
 
     def market
       Market.find(market_id)
     end
 
     def sales
-      Sales.select(vendor_id)
+      Sale.vendor_id(id)
     end
 
     def products
-      Product.select(vendor_id)
+      Product.by_vendor(id)
     end
   end  
 

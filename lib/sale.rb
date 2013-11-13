@@ -1,12 +1,12 @@
 class Sale
-  attr_accessor :id, :amount_in_cents, :purchase_time, :vendor_id, :product_id
+  attr_accessor :id, :amount, :purchase_time, :vendor_id, :product_id
 
   def initialize(array)
     @id = array[0].to_i
-    @amount_in_cents = array[1].to_i
-    @purchase_time = array[2]
+    @amount = array[1].to_i
+    @purchase_time = Time.parse(array[2])
     @vendor_id= array[-2].to_i
-    @product_id= array[-1]to_i
+    @product_id= array[-1].to_i
   end
 
   def self.all
@@ -22,8 +22,8 @@ class Sale
   end
 
   def self.find_by_amount_in_cents(cents)
-    all.find do |amount|
-      amount.amount_in_cents == cents.to_i
+    all.find do |total|
+      total.amount == cents.to_i
     end
   end
 
@@ -39,20 +39,17 @@ class Sale
     end
   end
 
-  #doesn't make sense
-  def vendor(sale_id)
-    Sale.find(sale_id) do |sales|
-      sales.vendor_id
-    end
+  def vendor
+    Vendor.find(vendor_id)
   end
 
-  def product(product_id)
+  def product
     Product.find(product_id) 
   end
 
   def self.between(beginning_time, end_time)
-    all.find_all do |times|
-      times.purchase_time == (beginning_time..end_time)
+    all.find_all do |sale|
+      (beginning_time..end_time).include? sale.purchase_time 
     end
   end
 end

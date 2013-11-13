@@ -36,8 +36,8 @@ class Market
     end
   end
 
-  def self.vendors(market_id)
-    Vendor.find_all_by_market_id(market_id)
+  def vendors
+    Vendor.by_market(id)
   end
 end
  

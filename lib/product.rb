@@ -32,7 +32,7 @@ class Product
   end
 
   def market
-    vendor.market
+    Vendor.market
   end
 
   def vendor
@@ -40,7 +40,11 @@ class Product
   end
 
   def sales
-    Sales.select(vendor_id)
+    Sale.all.select { |sale| sale.product_id == id}
+  end
+
+  def number_of_sales
+    sales.count
   end
 
 end
