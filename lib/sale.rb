@@ -32,31 +32,9 @@ class Sale
     end
   end
 
-  def self.find_vendor_in_sale(sale_id)
-    a = Sale.find(sale_id)
+  def self.vendor_id(ven_num)
+    all.select do |vendor|
+      vendor.vendor_id.to_i == ven_num.to_i
     end
-    a.find do |sales|
-      sales.vendor_id
-    end
+  end
 end
-
-  def self.vendor(sale_id)
-    Sale.find(sale_id) do |here|
-      here.vendor_id
-
-
-    Vendor.find(a)
-end
-
-  # def amount_in_cents
-  # end
-
-  # def purchase_time
-  # end
-
-  # def vendor_id
-  # end
-
-  # def product_id
-  # end
-

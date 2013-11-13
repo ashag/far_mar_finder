@@ -4,9 +4,10 @@ class Vendor
    
     def initialize(array)
       @vendor_id = array[0]
+      @id = array[0].to_i
       @name = array[1]
-      @no_of_employees = array[2]
-      @market_id = array[3]
+      @no_of_employees = array[2].to_i
+      @market_id = array[3].to_i
     end
 
     def self.all
@@ -15,7 +16,7 @@ class Vendor
       end
     end
 
-    def self.find(search)
+    def self.find(id)
       all.find do |vendor|
         vendor.vendor_id.to_i == search.to_i
       end
@@ -30,43 +31,39 @@ class Vendor
     def self.find_all_by_market_id(market_num)
       all.select do |market|
         market.market_id.to_i == market_num.to_i
+        vendor.id == id.to_i
+      end
+    end 
+
+    def self.find_by_name(ven_name)
+      all.find do |vendor|
+        vendor.name == ven_name
       end
     end
-  end
 
-  #   def No_of_employees(empl)
-  #     all.select do |vendor|
-  #       vendor.no_of_employees.to_i == no_of_employees
-  #     end
-  #   end
+    def self.find_by_no_of_employees(empl)
+      all.select do |vendor|
+        vendor.no_of_employees == empl
+      end
+    end
 
-  #   def market_id(m_id)
-  #   end
-  # end  
+    def self.by_market(market_id)
+      Market.find(market_id)
+    end
 
-  #   def id(id)
-  #       all.find do |vendor|
-  #         vendor.id.to_i == id
-  #       end
-  #     end
-  #   end
+    def market
+      Market.find(market_id)
+    end
 
-  #   def name(name)
-  #     all.select do |vendor|
-  #       vendor.name == name
-  #     end
-  #   end
+    def sales
+      Sales.select(vendor_id)
+    end
 
-  #   def No_of_employees(empl)
-  #     all.select do |vendor|
-  #       vendor.no_of_employees.to_i == no_of_employees
-  #     end
-  #   end
+    def products
+      Product.select(vendor_id)
+    end
+  end  
 
-
-  #   def market_id(m_id)
-  #   end
-  # end  
 
 
 
