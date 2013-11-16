@@ -10,7 +10,7 @@ class Vendor
     end
 
     def self.all
-      CSV.read("./support/vendors.csv").map do |array|
+      @all_market ||= CSV.read("./support/vendors.csv").map do |array|
         Vendor.new(array)
       end
     end
@@ -39,9 +39,23 @@ class Vendor
       end
     end
 
-    # def self.by_market(market_id)
-    #   Market.find(market_id)
-    # end
+    def self.random
+      all.sample
+    end
+
+    def self.revenue
+      Sale.all.max_by { |sale| sale.amount}
+    end
+
+    def self.revenue_top3
+      Sale.all.sort_by {|sale| sale.amount}.first(3)
+    end
+
+    def self.most_items
+      a = Sale.all.group_by {|sale| sale.vendor_id}
+      a = a.max_by {|id, array| array.size}
+      Vendor.find(a[0])
+    end
 
     def market
       Market.find(market_id)
@@ -54,31 +68,9 @@ class Vendor
     def products
       Product.by_vendor(id)
     end
-  end  
+end  
 
-  #   def id(id)
-  #       all.find do |vendor|
-  #         vendor.id.to_i == id
-  #       end
-  #     end
-  #   end
-
-  #   def name(name)
-  #     all.select do |vendor|
-  #       vendor.name == name
-  #     end
-  #   end
-
-  #   def No_of_employees(empl)
-  #     all.select do |vendor|
-  #       vendor.no_of_employees.to_i == no_of_employees
-  #     end
-  #   end
-
-
-  #   def market_id(m_id)
-  #   end
-  # end  
+  
 
 
 

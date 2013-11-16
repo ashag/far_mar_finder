@@ -8,7 +8,7 @@ class Product
   end
 
   def self.all
-    CSV.read("./support/products.csv").map do |array|
+    @all_market ||= CSV.read("./support/products.csv").map do |array|
       Product.new(array)
     end
   end
@@ -29,6 +29,10 @@ class Product
     all.find_all do |vendor|
       vendor.vendor_id == id.to_i
     end
+  end
+
+  def self.random
+    all.sample
   end
 
   def market

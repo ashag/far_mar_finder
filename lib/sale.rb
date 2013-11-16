@@ -1,5 +1,5 @@
 class Sale
-  attr_accessor :id, :amount, :purchase_time, :vendor_id, :product_id
+  attr_accessor :id, :amount, :purchase_time, :vendor_id, :product_id, :find_sales
 
   def initialize(array)
     @id = array[0].to_i
@@ -7,10 +7,11 @@ class Sale
     @purchase_time = Time.parse(array[2])
     @vendor_id= array[-2].to_i
     @product_id= array[-1].to_i
+    @find_sales = {}
   end
 
   def self.all
-    CSV.read("./support/sales.csv").map do |array|
+    @all_market ||= CSV.read("./support/sales.csv").map do |array|
       Sale.new(array)
     end
   end
@@ -29,17 +30,35 @@ class Sale
 
   def self.find_all_by_product_id(product)
     all.select do |products|
-      products.product_id == product.to_i
+      products.product_id == product
     end
   end
 
   def self.vendor_id(ven_num)
     all.select do |vendor|
-      vendor.vendor_id == ven_num.to_i
+      vendor.vendor_id == ven_num
     end
   end
 
-  def vendor
+  def self.random
+    all.sample
+  end
+
+  def self.sort_by_sales
+    total = 0
+    find_sales = all.group_by {|sales| sales.vendor_id }
+    find_sales = find_sales.each {|vendor, instance| total += instance.amount }
+
+    find_sales.map {|key, value| find_sales[key] = total}.sort.last
+  end
+
+  def self.best_day
+    a = all.group_by {|day| day.purchase_time}
+    b = a.max_by {|time, array| array.size}
+    b[0]
+  end
+
+   def vendor
     Vendor.find(vendor_id)
   end
 

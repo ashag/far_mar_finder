@@ -1,3 +1,5 @@
+require 'Date'
+
 class Market
 
   attr_accessor :id, :name, :address, :city, :county, :state, :zip
@@ -13,7 +15,7 @@ class Market
   end
 
   def self.all
-    CSV.read("./support/markets.csv").map do |array|
+    @all_market ||= CSV.read("./support/markets.csv").map do |array|
       Market.new(array)
     end
   end
@@ -39,6 +41,45 @@ class Market
   def vendors
     Vendor.by_market(id)
   end
+
+  def self.random
+    all.sample
+  end
+
+  def products
+    a = Vendor.by_market(id)
+    a.map { |vendor| Product.by_vendor(vendor.id)}
+  end
+
+  def self.search(search_term)
+    all.select do |market|
+      market.name.downcase.include? search_term || Vendor.find_by_name(search_term)
+    end
+  end 
+
+  def prefered_vendor
+    highsale = Vendor.revenue.vendor_id
+    Vendor.find(highsale)
+  end
+
+  def prefered_vendor_by_date(date)
+    sale_of_date = Sale.all.each { |go_girl| go_girl.purchase_time == Time.parse(date) }
+    find_vendor = sale_of_date.max_by {|sale| sale.amount} 
+    Vendor.find(find_vendor.vendor_id)
+  end
+
+  def worst_vendor
+    low_sale = Sale.all.min_by {|vendor| vendor.amount}
+    Vendor.find(low_sale.vendor_id)
+  end
+
+  def worst_vendor_by_date(date)
+    sale_of_date = Sale.all.each { |go_girl| go_girl.purchase_time == Time.parse(date) }
+    find_vendor = sale_of_date.min_by { |sale| sale.amount}
+    Vendor.find(find_vendor.vendor_id)
+  end
 end
+
+
  
  
